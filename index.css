@@ -1,0 +1,12 @@
+body{
+	background-color: #fffff;
+	height: 100vh;
+}
+.header{
+	padding: 0px;
+	width: 100%;
+	position: fixed;
+    	top: 0;
+    	left: 0;
+background-color: #ffb3b3;
+}
