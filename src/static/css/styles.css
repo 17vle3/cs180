@@ -1,0 +1,22 @@
+/* JCPenny Font and colors based on google search */
+.brand-font {
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+}
+
+.logo{ 
+    color: #e71324;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #202020;
+}
+
+.response {
+    color: #202020;
+}
