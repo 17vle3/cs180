@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %} JCPenny Analytics {% endblock %}
+{% block title %}Kickstarter Analytics{% endblock %}
 
 {% block body %}
     <div class="home">
-        <h1>This is the home page for JCPenney Analytics!</h1>
-        <form action="{{ url_for('index') }}" method="POST">
-            <input type="submit" class="btn btn-danger" value="Send Request to Server">
-        </form>
+        <h1 class="brand-font">Welcome to Kickstarter Analytics!</h1>
     </div>
 {% endblock %}
