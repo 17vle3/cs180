@@ -3,7 +3,9 @@ def search(searchTerm, searchFilter, projectList):
     if searchFilter == 'id':
         for project in projectList:
             if project[searchFilter] == searchTerm:
-                return project
+                matches = []
+                matches.append(project)
+                return matches
 
     else:
         matches = list(filter(lambda project: project[searchFilter] == searchTerm, projectList))

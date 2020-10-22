@@ -6,8 +6,27 @@
     <div class="search-results">
         <h1 class="brand-font">Search Results:</h1>
     </div>
-    
-    {% for match in matches %}
-        <li>{{match}}</li>
-    {% endfor %}    
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Backers</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for match in matches %}
+            <tr>
+                <td scope="row">{{match.id}}</th>
+                <td>{{match.name}}</td>
+                <td>{{match.category}}</td>
+                <td>{{match.currency}}</td>
+                <td>{{match.backers}}</td>
+                <td>{{match.country}}</td> 
+            </tr>
+        {% endfor %} 
+        </tbody>  
 {% endblock %}
