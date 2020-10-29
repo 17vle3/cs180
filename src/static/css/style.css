@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+html {
+    font-family: 'Roboto', sans-serif;
+}
+.brand-font {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+}
+
+.logo{ 
+    color: #5cb85c;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #202020;
+}
+
+.response {
+    color: #202020;
+}
+
+.dropdown-menu {
+    width: 500px;
+    height: 400px;
+}

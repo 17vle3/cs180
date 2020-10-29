@@ -4,19 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" type="text/css">
+
         <title>{% block title %} {% endblock %}</title>
 
         <!--Bootstrap Link-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <!-- Stylesheets use special links using flask https://stackoverflow.com/questions/13772884/css-problems-with-flask-web-app-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link type = "text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         
     </head>
-    <body>
+    <body style="font-family: 'Roboto', sans-serif">
         <nav class="navbar navbar-expand-md bg-light">
-            <a class="navbar-brand brand-font logo" href="{{ url_for('index') }}">Kickstarter Analytics</a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <!-- DROPDOWN FORM FOR INSERTING STARTS HERE-->
@@ -111,26 +112,7 @@
                 </li>
             </ul>
         </nav>
-            <!-- SEARCH BAR STARTS HERE-->
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="w-60">
-                        <form class="form-inline" action="/projects" method="GET">
-                                <label class="sr-only" for="keyword">Keyword</label>
-                                <input class="form-control" type="search" name="keyword" placeholder="Search" >
-                                <label for="filter">Search by...</label>
-                                <select class="form-control" name ="filter" id="filter">
-                                    <option value="id">ID</option> 
-                                    <option value="name">Name</option>
-                                    <option value="category">Category</option>
-                                    <option value="currency">Currency</option>
-                                    <option value="backers"># of Backers</option>
-                                    <option value="country">Country</option>
-                                </select>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        
             <!-- SEARCH BAR ENDS HERE-->
         {% block body %}{% endblock %}
     </body>

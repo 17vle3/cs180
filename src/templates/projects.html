@@ -3,8 +3,30 @@
 {% block title %}Search Results{% endblock %}
 
 {% block body %}
-    <div class="search-results">
-        <h1 class="brand-font">Search Results:</h1>
+<center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 250%; margin-top: 1%;">Kickstarter Analytics</a></center>
+            <!-- SEARCH BAR STARTS HERE-->
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="w-60">
+                        <form class="form-inline" action="/projects" method="GET">
+                                <label class="sr-only" for="keyword">Keyword</label>
+                                <input class="form-control" type="search" name="keyword" placeholder="Search">
+                                <label for="filter" style="padding-left: 10px; padding-right: 10px;">Search by...</label>
+                                <select class="form-control" name ="filter" id="filter">
+                                    <option value="id">ID</option> 
+                                    <option value="name">Name</option>
+                                    <option value="category">Category</option>
+                                    <option value="currency">Currency</option>
+                                    <option value="backers"># of Backers</option>
+                                    <option value="country">Country</option>
+                                </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div  style="padding-left: 10%; padding-right: 10%;">
+    <div class="search-results"">
+        <h1 class="brand-font" style="font-family: 'Roboto', sans-serif">Search Results:</h1>
     </div>
     <table class="table table-striped">
         <thead>
@@ -102,6 +124,7 @@
                     <a class="btn btn-danger" href="/delete/{{match.id}}" role="button">Delete</a>
                 </td>
             </tr>
+        </div>
         {% endfor %} 
         </tbody>  
 {% endblock %}
