@@ -15,7 +15,7 @@ def results():
     
     matches = search.search(request.args.get('keyword'), request.args.get('filter'), projectList)
     if not matches:
-        return "No matches found :("
+        return render_template('matchError.html')
     return render_template('projects.html', matches=matches)
     #return jsonify(matches)
 

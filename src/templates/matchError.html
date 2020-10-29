@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block body %}
+<center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 250%; margin-top: 1%;">Kickstarter Analytics</a></center>
+            <!-- SEARCH BAR STARTS HERE-->
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="w-60">
+                        <form class="form-inline" action="/projects" method="GET">
+                                <label class="sr-only" for="keyword">Keyword</label>
+                                <input class="form-control" type="search" name="keyword" placeholder="Search">
+                                <label for="filter" style="padding-left: 10px; padding-right: 10px;">Search by...</label>
+                                <select class="form-control" name ="filter" id="filter">
+                                    <option value="id">ID</option> 
+                                    <option value="name">Name</option>
+                                    <option value="category">Category</option>
+                                    <option value="currency">Currency</option>
+                                    <option value="backers"># of Backers</option>
+                                    <option value="country">Country</option>
+                                </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div  style="padding-left: 10%; padding-right: 10%;">
+    <div class="search-results" style="font-family: 'Roboto', sans-serif; color:#666666;">
+        Error no results :((
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Backers</th>
+            <th scope="col">Country</th>
+			<th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for match in matches %}
+            <tr>
+                <td scope="row">{{match.id}}</td>
+                <td>{{match.name}}</td>
+                <td>{{match.category}}</td>
+                <td>{{match.currency}}</td>
+                <td>{{match.backers}}</td>
+                <td>{{match.country}}</td>
+				<td>
+                    <div class="dropleft">
+                        <button style = "border: 2px solid #7bed7b;
+                        border-radius: 5px; " class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Update</button>
+                        <div class="dropdown-menu">
+                            <form action="/update/{{match.id}}" method="POST">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="id" placeholder="ID" value="{{match.id}}" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="name" placeholder="Name"  value="{{match.name}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="category" placeholder="Category" value="{{match.category}}">
+                                    </div>
+                                    <div class="col">
+                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category" value="{{match.main_category}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="currency" placeholder="Currency" value="{{match.currency}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="deadline">Deadline:</label> 
+                                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{match.deadline}}">
+                                    </div>
+                                    <div class="col">
+                                        <label for="launched">Launched:</label> 
+                                        <input type="date" id="launched" class="form-control" name="launched" value="{{match.launched}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="state" placeholder="State" value="{{match.state}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="goal" placeholder="Goal" value="{{match.goal}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged" value="{{match.pledged}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="backers" placeholder="# Backers" value="{{match.backers}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="country" placeholder="Country" value="{{match.country}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged" value="{{match.usd_pledged}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged_real" placeholder="USD Pledged Real" value="{{match.usd_pledged_real}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_goal_real" placeholder="USD Goal Real" value="{{match.usd_goal_real}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success">Update Project</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <a style = "border: 2px solid #f23f3f;
+                    border-radius: 5px; margin-top: 5px;
+                    width:100px;" class="btn btn-light" href="/delete/{{match.id}}" role="button">Delete</a>
+                </td>
+            </tr>
+        </div>
+
+        
+
+        {% endfor %} 
+
+        
+        </tbody> 
+{% endblock %}
