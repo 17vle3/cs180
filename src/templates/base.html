@@ -26,39 +26,39 @@
                             <form action="/insert" method="POST">
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="text" class="form-control" name="id" placeholder="ID">
+                                        <input type="text" class="form-control" name="id" placeholder="ID" required="required" minlength="9">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="name" placeholder="Name">
+                                        <input type="text" class="form-control" name="name" placeholder="Name" required="required" minlength="5">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="text" class="form-control" name="category" placeholder="Category">
+                                        <input type="text" class="form-control" name="category" placeholder="Category" required="required">
                                     </div>
                                     <div class="col">
-                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category">
+                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category" required="required">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="currency" placeholder="Currency">
+                                        <input type="text" class="form-control" name="currency" placeholder="Currency" required="required">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="deadline">Deadline:</label> 
-                                        <input type="date" id="deadline" class="form-control" name="deadline">
+                                        <input type="date" id="deadline" class="form-control" name="deadline" required="required">
                                     </div>
                                     <div class="col">
                                         <label for="launched">Launched:</label> 
-                                        <input type="date" id="launched" class="form-control" name="launched">
+                                        <input type="date" id="launched" class="form-control" name="launched" required="required">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" name="goal" placeholder="Goal">
+                                        <input type="number" class="form-control" name="goal" placeholder="Goal" required="required" min="20" max="999999999">
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged">
+                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged" required="required" min="0" max="999999999">
                                     </div>
                                     <div class="col">
                                         <label for="state">State:</label>
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" name="backers" placeholder="# Backers">
+                                        <input type="number" class="form-control" name="backers" placeholder="# Backers" min="0" max="999999999">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="country" placeholder="Country">
+                                        <input type="text" class="form-control" name="country" placeholder="Country" required="required">
                                     </div>
                                     <div class="col">
                                         <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged">
@@ -117,7 +117,7 @@
                     <div class="w-60">
                         <form class="form-inline" action="/projects" method="GET">
                                 <label class="sr-only" for="keyword">Keyword</label>
-                                <input class="form-control" type="search" name="keyword" placeholder="Search">
+                                <input class="form-control" type="search" name="keyword" placeholder="Search" >
                                 <label for="filter">Search by...</label>
                                 <select class="form-control" name ="filter" id="filter">
                                     <option value="id">ID</option> 
