@@ -37,9 +37,6 @@ def buildList(filename):
         project = importProject(row)
         projectList.append(project)
 
-    #print(*projectList, sep="\n")
-    #print(projectList[37941]['name'])
-
     csv_file.close()
     
     return projectList

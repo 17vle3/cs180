@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
-        <title>Kickstarter Analytics</title>
-        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }} type="image/x-icon"/>
+        <title>{% block title %} {% endblock %}</title>
+
         <!--Bootstrap Link-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
@@ -15,29 +15,123 @@
         
     </head>
     <body>
-        <div style="width:100%; height: 10em; background-color: #f2f2f2">
-            <p style="margin-left: 40%; font-size: 36px;padding-top: 3%;">Kickstarter Analytics</p>
-        </div>
-
-        <center><div style ="padding-top: 80px;">
-            <form action="/projects" method="GET">
-                <div class="input-group mb-3" style="width:500px;">
-                    <input type="search" name="keyword" class="form-control" placeholder="What can we help you find?" aria-label="What can we help you find?" aria-describedby="button-addon2" >
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        <nav class="navbar navbar-expand-md bg-light">
+            <a class="navbar-brand brand-font logo" href="{{ url_for('index') }}">Kickstarter Analytics</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <!-- DROPDOWN FORM FOR INSERTING STARTS HERE-->
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert Project</button>
+                        <div class="dropdown-menu">
+                            <form action="/insert" method="POST">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="id" placeholder="ID">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="name" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="category" placeholder="Category">
+                                    </div>
+                                    <div class="col">
+                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="currency" placeholder="Currency">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="deadline">Deadline:</label> 
+                                        <input type="date" id="deadline" class="form-control" name="deadline">
+                                    </div>
+                                    <div class="col">
+                                        <label for="launched">Launched:</label> 
+                                        <input type="date" id="launched" class="form-control" name="launched">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="goal" placeholder="Goal">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged">
+                                    </div>
+                                    <div class="col">
+                                        <label for="state">State:</label>
+                                        <select name="state" class="form-control" id="state">
+                                            <option value="successful">Successful</option>
+                                            <option value="failed">Failed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="backers" placeholder="# Backers">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="country" placeholder="Country">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged_real" placeholder="USD Pledged Real">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_goal_real" placeholder="USD Goal Real">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success">Insert Project</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-              <label for="filter">Search by...</label>
-              <select name ="filter" id="filter">
-                <option value="id">ID</option>
-                <option value="name">Name</option>
-                <option value="category">Category</option>
-                <option value="currency">Currency</option>
-                <option value="backers"># of Backers</option>
-                <option value="country">Country</option>
-              </select>
-            </form>
-        </div></center>
+                    <!-- DROPDOWN FORM FOR INSERTING ENDS HERE-->
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link btn btn-info btn-sm" href="{{ url_for('backup') }}">Backup Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Breakdown By Country</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Breakdown by Failures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Funding Goal vs Success</a>
+                </li>
+            </ul>
+        </nav>
+            <!-- SEARCH BAR STARTS HERE-->
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="w-60">
+                        <form class="form-inline" action="/projects" method="GET">
+                                <label class="sr-only" for="keyword">Keyword</label>
+                                <input class="form-control" type="search" name="keyword" placeholder="Search">
+                                <label for="filter">Search by...</label>
+                                <select class="form-control" name ="filter" id="filter">
+                                    <option value="id">ID</option> 
+                                    <option value="name">Name</option>
+                                    <option value="category">Category</option>
+                                    <option value="currency">Currency</option>
+                                    <option value="backers"># of Backers</option>
+                                    <option value="country">Country</option>
+                                </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- SEARCH BAR ENDS HERE-->
         {% block body %}{% endblock %}
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Backup Successful!{% endblock %}
+
+{% block body %}
+    <div class="home container-fluid text-center">
+        <h1 class="brand-font">Data Backup was a success!</h1>
+        <button type="button" class="btn btn-success">
+            <a class="nav-link" href="{{ url_for('index') }}">Return Home</a>
+        </button>
+    </div>
+{% endblock %}

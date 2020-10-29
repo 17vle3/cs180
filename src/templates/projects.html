@@ -15,6 +15,7 @@
             <th scope="col">Currency</th>
             <th scope="col">Backers</th>
             <th scope="col">Country</th>
+			<th scope="col">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -25,7 +26,8 @@
                 <td>{{match.category}}</td>
                 <td>{{match.currency}}</td>
                 <td>{{match.backers}}</td>
-                <td>{{match.country}}</td> 
+                <td>{{match.country}}</td>
+				<td><a class="btn btn-primary" href="#" role="button">Update</a><a class="btn btn-danger" href="#" role="button">Delete</a></td>
             </tr>
         {% endfor %} 
         </tbody>  
