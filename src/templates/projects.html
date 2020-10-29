@@ -21,13 +21,86 @@
         <tbody>
         {% for match in matches %}
             <tr>
-                <td scope="row">{{match.id}}</th>
+                <td scope="row">{{match.id}}</td>
                 <td>{{match.name}}</td>
                 <td>{{match.category}}</td>
                 <td>{{match.currency}}</td>
                 <td>{{match.backers}}</td>
                 <td>{{match.country}}</td>
-				<td><a class="btn btn-primary" href="#" role="button">Update</a><a class="btn btn-danger" href="#" role="button">Delete</a></td>
+				<td>
+                    <div class="dropleft">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Update</button>
+                        <div class="dropdown-menu">
+                            <form action="/update/{{match.id}}" method="POST">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="id" placeholder="ID" value="{{match.id}}" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="name" placeholder="Name"  value="{{match.name}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="category" placeholder="Category" value="{{match.category}}">
+                                    </div>
+                                    <div class="col">
+                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category" value="{{match.main_category}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="currency" placeholder="Currency" value="{{match.currency}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="deadline">Deadline:</label> 
+                                        <input type="date" id="deadline" class="form-control" name="deadline" value="{{match.deadline}}">
+                                    </div>
+                                    <div class="col">
+                                        <label for="launched">Launched:</label> 
+                                        <input type="date" id="launched" class="form-control" name="launched" value="{{match.launched}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="state" placeholder="State" value="{{match.state}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="goal" placeholder="Goal" value="{{match.goal}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged" value="{{match.pledged}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="backers" placeholder="# Backers" value="{{match.backers}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" name="country" placeholder="Country" value="{{match.country}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged" value="{{match.usd_pledged}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_pledged_real" placeholder="USD Pledged Real" value="{{match.usd_pledged_real}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" class="form-control" name="usd_goal_real" placeholder="USD Goal Real" value="{{match.usd_goal_real}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success">Update Project</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <a class="btn btn-danger" href="/delete/{{match.id}}" role="button">Delete</a>
+                </td>
             </tr>
         {% endfor %} 
         </tbody>  
