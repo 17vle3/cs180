@@ -8,7 +8,7 @@ def search(searchTerm, searchFilter, projectList):
                 return matches
 
     else:
-        matches = list(filter(lambda project: project[searchFilter] == searchTerm, projectList))
+        matches = list(filter(lambda project: project[searchFilter].lower() == searchTerm.lower(), projectList))
         if not matches:
             return None
         return matches

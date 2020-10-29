@@ -12,6 +12,7 @@ def index():
 
 @app.route("/projects", methods=['GET'])
 def results():
+    
     matches = search.search(request.args.get('keyword'), request.args.get('filter'), projectList)
     if not matches:
         return "No matches found :("
