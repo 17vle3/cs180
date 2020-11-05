@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Country Statistics{% endblock %}
+
+{% block head %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> {% endblock %}
+
+{% block body %}
+<center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 350%;">Kickstarter Analytics</a></center>
+<!-- SEARCH BAR STARTS HERE-->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="w-60">
+            <form class="form-inline" action="/projects" method="GET">
+                    <label class="sr-only" for="keyword">Keyword</label>
+                    <input class="form-control" type="search" name="keyword" placeholder="Search">
+                    <label for="filter" style="padding-left: 10px; padding-right: 10px;">Search by...</label>
+                    <select class="form-control" name ="filter" id="filter">
+                        <option value="id">ID</option> 
+                        <option value="name"selected>Name</option>
+                        <option value="category">Category</option>
+                        <option value="currency">Currency</option>
+                        <option value="backers"># of Backers</option>
+                        <option value="country">Country</option>
+                    </select>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <canvas id="countryStats" width="600" height="400" aria-label="# of Projects" role="img"></canvas>    
+</div>
+<script>
+var countryStatsCanvas = document.getElementById('countryStats').getContext('2d');
+
+//https://www.patricksoftwareblog.com/creating-charts-with-chart-js-in-a-flask-application/
+//https://www.chartjs.org/docs/latest/
+//https://www.youtube.com/watch?v=sE08f4iuOhA
+var countryStatsChart = new Chart(countryStatsCanvas, {
+    //Chart options: bar, horizontalBar, pie, line, doughnut, radar, polarArea
+    type: 'bar', 
+    data: {
+        labels: [{% for countryName in countryNames %}
+                     "{{countryName}}",
+                     {% endfor %}
+                ],
+        datasets: [{
+            label: '{{ chartName }}',
+            minBarLength: 10,
+            data : [{% for countryValue in countryValues %}
+                "{{countryValue}}",
+              {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(177, 8, 47, 0.2)',
+                'rgba(210, 127, 220, 0.2)',
+                'rgba(163, 229, 242, 0.2)',
+                'rgba(63, 244, 134, 0.2)',
+                'rgba(133, 121, 88, 0.2)',
+                'rgba(114, 45, 3, 0.2)',
+                'rgba(215, 9, 205, 0.2)',
+                'rgba(246, 48, 10, 0.2)',
+                'rgba(235, 134, 219, 0.2)',
+                'rgba(242, 72, 36, 0.2)',
+                'rgba(86, 16, 201, 0.2)',
+                'rgba(8, 184, 33, 0.2)',
+                'rgba(196, 88, 199, 0.2)',
+                'rgba(64, 36, 184, 0.2)',
+                'rgba(143, 73, 19, 0.2)',
+                'rgba(72, 200, 234, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(177, 8, 47, 1)',
+                'rgba(210, 127, 220, 1)',
+                'rgba(163, 229, 242, 1)',
+                'rgba(63, 244, 134, 1)',
+                'rgba(133, 121, 88, 1)',
+                'rgba(114, 45, 3, 1)',
+                'rgba(215, 9, 205, 1)',
+                'rgba(246, 48, 10, 1)',
+                'rgba(235, 134, 219, 1)',
+                'rgba(242, 72, 36, 1)',
+                'rgba(86, 16, 201, 1)',
+                'rgba(8, 184, 33, 1)',
+                'rgba(196, 88, 199, 1)',
+                'rgba(64, 36, 184, 1)',
+                'rgba(143, 73, 19, 1)',
+                'rgba(72, 200, 234, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display:true,
+            text:'Where Are Most Kickstarter Projects Started From?',
+            fontSize:25
+        },
+        legend: {
+            display:false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -25,18 +25,18 @@ def importProject(row):
     return project
 
 #Takes the specified CSV file and builds a list of project dictionaries 
-def buildList(filename):
-    csv_file = open(filename, encoding='utf-8')
+def buildList(fileName):
+    csvFile = open(fileName, encoding='utf-8')
     #Skip the header line before building the list 
-    next(csv_file)
+    next(csvFile)
 
     #Python list https://www.w3schools.com/python/python_lists.asp
     projectList = []
 
-    for row in csv_file:
+    for row in csvFile:
         project = importProject(row)
         projectList.append(project)
 
-    csv_file.close()
+    csvFile.close()
     
     return projectList

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Failure Statistics{% endblock %}
+
+{% block head %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> {% endblock %}
+
+{% block body %}
+<center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 350%;">Kickstarter Analytics</a></center>
+<!-- SEARCH BAR STARTS HERE-->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="w-60">
+            <form class="form-inline" action="/projects" method="GET">
+                    <label class="sr-only" for="keyword">Keyword</label>
+                    <input class="form-control" type="search" name="keyword" placeholder="Search">
+                    <label for="filter" style="padding-left: 10px; padding-right: 10px;">Search by...</label>
+                    <select class="form-control" name ="filter" id="filter">
+                        <option value="id">ID</option> 
+                        <option value="name"selected>Name</option>
+                        <option value="category">Category</option>
+                        <option value="currency">Currency</option>
+                        <option value="backers"># of Backers</option>
+                        <option value="country">Country</option>
+                    </select>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <canvas id="failedTakeoffStats" width="600" height="400" aria-label="# of Projects with 0 Backers" role="img"></canvas>    
+</div>
+<script>
+var failedTakeoffStatsCanvas = document.getElementById('failedTakeoffStats').getContext('2d');
+
+//https://www.patricksoftwareblog.com/creating-charts-with-chart-js-in-a-flask-application/
+//https://www.chartjs.org/docs/latest/
+//https://www.youtube.com/watch?v=sE08f4iuOhA
+var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
+    //Chart options: bar, horizontalBar, pie, line, doughnut, radar, polarArea
+    type: 'doughnut', 
+    data: {
+        labels: [{% for categoryName in categoryNames %}
+                     "{{categoryName}}",
+                     {% endfor %}
+                ],
+        datasets: [{
+            label: '{{ chartName }}',
+            data : [{% for categoryValue in categoryValues %}
+                "{{categoryValue}}",
+              {% endfor %}],
+            backgroundColor: [
+                'rgba(180, 98, 251, 1)',
+                'rgba(228, 95, 206, 1)',
+                'rgba(197, 16, 97, 1)',
+                'rgba(123, 169, 203, 1)',
+                'rgba(24, 117, 1, 1)',
+                'rgba(175, 18, 4, 0.9)',
+                'rgba(239, 21, 96, 1)',
+                'rgba(103, 228, 89, 1)',
+                'rgba(37, 16, 83, 1)',
+                'rgba(252, 193, 47, 1)',
+                'rgba(75, 228, 235, 1)',
+                'rgba(10, 14, 252, 1)',
+                'rgba(112, 35, 5, 1)'   
+            ],
+            borderColor: [
+                'rgba(180, 98, 251, 1)',
+                'rgba(228, 95, 206, 1)',
+                'rgba(197, 16, 97, 1)',
+                'rgba(123, 169, 203, 1)',
+                'rgba(24, 117, 1, 1)',
+                'rgba(175, 18, 4, 0.9)',
+                'rgba(239, 21, 96, 1)',
+                'rgba(103, 228, 89, 1)',
+                'rgba(37, 16, 83, 1)',
+                'rgba(252, 193, 47, 1)',
+                'rgba(75, 228, 235, 1)',
+                'rgba(10, 14, 252, 1)',
+                'rgba(112, 35, 5, 1)'
+
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        title: {
+            display:true,
+            text:'How Many Projects Failed To Take Off?',
+            fontSize:25
+        },
+        legend: {
+            display:false
+        },
+    }
+});
+</script>
+{% endblock %}

@@ -3,6 +3,7 @@ from flask import Flask, jsonify, redirect, render_template, request, url_for, f
 from modules import importCSV
 from modules import exportCSV
 from modules import search
+from modules import analytics
 
 app = Flask(__name__)
 
@@ -44,8 +45,8 @@ def insert():
 
 @app.route("/backup", methods=['GET'])
 def backup():
-    filename = "backup_" + time.strftime("%m-%d-%Y")
-    exportCSV.exportList(filename, projectList)
+    fileName = "backup_" + time.strftime("%m-%d-%Y")
+    exportCSV.exportList(fileName, projectList)
     return render_template('backup.html')
 
 @app.route("/delete/<string:id>")
@@ -76,6 +77,23 @@ def update(id):
             projectList[i]["usd_goal_real"] = request.form["usd_goal_real"]
     return redirect('/')
 
+@app.route("/countryStats")
+def countryStats():
+    countryStats = analytics.getCountryStats(projectList)
+    #print(countryStats.keys())
+    #print(countryStats.values())
+    return render_template('countryStats.html', countryValues=countryStats.values(), countryNames=countryStats.keys(), chartName="Country Statistics")
+
+@app.route("/failedTakeoffStats")
+def failedTakeoffStats():
+    failedTakeoffStats = analytics.getFailedTakeoffStats(projectList)
+    print(failedTakeoffStats.keys())
+    print(failedTakeoffStats.values())
+    return render_template('failedTakeoffStats.html', categoryValues=failedTakeoffStats.values(), categoryNames=failedTakeoffStats.keys(), chartName="Failed Takeoff Statistics")
+
+
 if __name__ == "__main__":
     projectList = importCSV.buildList('data/projects_clean.csv')
+    #print(analytics.getCountryStats(projectList))
+    #print(analytics.getFailedTakeoffStats(projectList))
     app.run()
