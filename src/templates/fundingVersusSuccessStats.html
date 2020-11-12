@@ -47,10 +47,11 @@ var fundingVersusSuccessStatsChart = new Chart(fundingVersusSuccessStatsCanvas, 
                 ],
         datasets: [{
             label: '{{ chartName }}',
-            fill: true,
+            fill: false,
             lineTension: 0.1,
             //Background color is color of the dot points
-            backgroundColor: "rgba(174, 149, 150, 1)",
+            backgroundColor: "rgba(12, 238, 11, 0.9)",
+            pointRadius: 12,
             //Border color is the color of the graph line
             borderColor: "rgba(0, 0, 0, 1)",
             data : [{% for fundingVersusSuccessValue in fundingVersusSuccessValues %}
@@ -66,6 +67,23 @@ var fundingVersusSuccessStatsChart = new Chart(fundingVersusSuccessStatsCanvas, 
         },
         legend: {
             display:false
+        },
+        scales: {
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Funding Brackets (USD)'
+                 }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: '% Success Rate'
+                 }
+            }]
         }
     }
 });
