@@ -19,12 +19,12 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         
     </head>
-    <body style="font-family: 'Roboto', sans-serif">
+    <body style="font-family: 'Roboto', sans-serif; ">
         <nav class="navbar navbar-expand-md bg-light">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <!-- DROPDOWN FORM FOR INSERTING STARTS HERE-->
-                    <div class="dropdown">
+                    <div class="dropdown" style="float: left;">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert Project</button>
                         <div class="dropdown-menu">
                             <form action="/insert" method="POST">
@@ -100,7 +100,13 @@
                         </div>
                     </div>
                     <!-- DROPDOWN FORM FOR INSERTING ENDS HERE-->
-                </li>
+
+
+                    <select style="margin-top: 7px;" id="analytics" >
+                        <option value="countryStats"><a class="nav-link" href="{{ url_for('countryStats') }}">Breakdown By Country</a></option> 
+                        <option value="failedTakeoffStats"selected><a class="nav-link" href="{{ url_for('failedTakeoffStats') }}">Breakdown by Failed Takeoff</a></option>
+                    </select>
+                <!-- </li>
                 <li class="nav-item">
                         <a class="nav-link btn btn-light btn-sm" href="{{ url_for('backup') }}">Backup Data</a>
                 </li>
@@ -109,7 +115,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('failedTakeoffStats') }}">Breakdown by Failed Takeoff</a>
-                </li>
+                </li>-->
             </ul>
         </nav>
         
