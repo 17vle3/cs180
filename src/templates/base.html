@@ -27,8 +27,8 @@
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert Project</button>
                         <div class="dropdown-menu">
-                            <form action="/insert" method="POST">
-                                <div class="form-row">
+                            <form action="/insert" method="POST" >
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <input type="text" class="form-control" name="id" placeholder="ID" required="required" minlength="9">
                                     </div>
@@ -36,7 +36,7 @@
                                         <input type="text" class="form-control" name="name" placeholder="Name" required="required" minlength="5">
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <input type="text" class="form-control" name="category" placeholder="Category" required="required">
                                     </div>
@@ -47,7 +47,7 @@
                                         <input type="text" class="form-control" name="currency" placeholder="Currency" required="required">
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <label for="deadline">Deadline:</label> 
                                         <input type="date" id="deadline" class="form-control" name="deadline" required="required">
@@ -57,7 +57,7 @@
                                         <input type="date" id="launched" class="form-control" name="launched" required="required">
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <input type="number" class="form-control" name="goal" placeholder="Goal" required="required" min="20" max="999999999">
                                     </div>
@@ -72,7 +72,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <input type="number" class="form-control" name="backers" placeholder="# Backers" min="0" max="999999999">
                                     </div>
@@ -83,7 +83,7 @@
                                         <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged">
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
                                         <input type="number" class="form-control" name="usd_pledged_real" placeholder="USD Pledged Real">
                                     </div>
@@ -91,9 +91,9 @@
                                         <input type="number" class="form-control" name="usd_goal_real" placeholder="USD Goal Real">
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <button type="submit" class="btn btn-success">Insert Project</button>
+                                <div class="form-row" style="padding: 3px">
+                                    <div class="col" style="padding-top: 9px;">
+                                        <center><button type="submit" class="btn btn-success">Insert Project</button> </center>
                                     </div>
                                 </div>
                             </form>
