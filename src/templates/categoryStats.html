@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Failure Statistics{% endblock %}
+{% block title %}Category Statistics{% endblock %}
 
-{% block head %} <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> {% endblock %}
+{% block head %} 
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+{% endblock %}
 
 {% block body %}
 <center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 350%;">Kickstarter Analytics</a></center>
@@ -27,17 +29,17 @@
     </div>
 </div>
 <div class="container">
-    <canvas id="failedTakeoffStats" width="600" height="400" aria-label="# of Projects with 0 Backers" role="img"></canvas>    
+    <canvas id="categoryStats" width="600" height="400" aria-label="# of Projects in each category" role="img"></canvas>    
 </div>
 <script>
-var failedTakeoffStatsCanvas = document.getElementById('failedTakeoffStats').getContext('2d');
+var categoryStatsCanvas = document.getElementById('categoryStats').getContext('2d');
 
 //https://www.patricksoftwareblog.com/creating-charts-with-chart-js-in-a-flask-application/
 //https://www.chartjs.org/docs/latest/
 //https://www.youtube.com/watch?v=sE08f4iuOhA
-var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
+var categoryStatsChart = new Chart(categoryStatsCanvas, {
     //Chart options: bar, horizontalBar, pie, line, doughnut, radar, polarArea
-    type: 'doughnut', 
+    type: 'pie', 
     data: {
         labels: [{% for categoryName in categoryNames %}
                      "{{categoryName}}",
@@ -45,6 +47,7 @@ var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
                 ],
         datasets: [{
             label: '{{ chartName }}',
+            
             data : [{% for categoryValue in categoryValues %}
                 "{{categoryValue}}",
               {% endfor %}],
@@ -85,7 +88,7 @@ var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
     options: {
         title: {
             display:true,
-            text:'How Many Projects Failed To Take Off?',
+            text:'What are the most popular Kickstarter Categories?',
             fontSize:25
         }
     }

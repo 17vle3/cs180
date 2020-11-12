@@ -80,20 +80,33 @@ def update(id):
 @app.route("/countryStats")
 def countryStats():
     countryStats = analytics.getCountryStats(projectList)
-    #print(countryStats.keys())
-    #print(countryStats.values())
     return render_template('countryStats.html', countryValues=countryStats.values(), countryNames=countryStats.keys(), chartName="Country Statistics")
+
+@app.route("/categoryStats")
+def categoryStats():
+    categoryStats = analytics.getCategoryStats(projectList)
+    return render_template('categoryStats.html', categoryValues=categoryStats.values(), categoryNames=categoryStats.keys(), chartName="Category Statistics")
+
+@app.route("/deadlineStats")
+def deadlineStats():
+    deadlineStats = analytics.getDeadlineStats(projectList)
+    return render_template('deadlineStats.html', deadlineValues=deadlineStats.values(), deadlineNames=deadlineStats.keys(), chartName="Deadline Statistics")
+
+@app.route("/mostSuccessfulCategoryStats")
+def mostSuccessfulCategoryStats():
+    mostSuccessfulCategoryStats = analytics.getMostSuccessfulCategoryStats(projectList)
+    return render_template('mostSuccessfulCategoryStats.html', mostSuccessfulCategoryValues=mostSuccessfulCategoryStats.values(), mostSuccessfulCategoryNames=mostSuccessfulCategoryStats.keys(), chartName="Most Successful Statistics")
 
 @app.route("/failedTakeoffStats")
 def failedTakeoffStats():
     failedTakeoffStats = analytics.getFailedTakeoffStats(projectList)
-    print(failedTakeoffStats.keys())
-    print(failedTakeoffStats.values())
     return render_template('failedTakeoffStats.html', categoryValues=failedTakeoffStats.values(), categoryNames=failedTakeoffStats.keys(), chartName="Failed Takeoff Statistics")
 
+@app.route("/fundingVersusSuccessStats")
+def fundingVersusSuccessStats():
+    fundingVersusSuccessStats = analytics.getFundingVersusSuccessStats(projectList)
+    return render_template('fundingVersusSuccessStats.html', fundingVersusSuccessValues=fundingVersusSuccessStats.values(), fundingVersusSuccessNames=fundingVersusSuccessStats.keys(), chartName="Funding Versus Success Statistics")
 
 if __name__ == "__main__":
     projectList = importCSV.buildList('data/projects_clean.csv')
-    #print(analytics.getCountryStats(projectList))
-    #print(analytics.getFailedTakeoffStats(projectList))
     app.run()

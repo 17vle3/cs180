@@ -110,10 +110,20 @@ var countryStatsChart = new Chart(countryStatsCanvas, {
             display:false
         },
         scales: {
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Countries'
+                 }
+            }],
             yAxes: [{
                 ticks: {
                     beginAtZero: true
-                }
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: '# of Projects'
+                 }
             }]
         }
     }
