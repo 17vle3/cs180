@@ -17,7 +17,15 @@ def results():
     matches = search.search(request.args.get('keyword'), request.args.get('filter'), projectList)
     if not matches:
         return render_template('matchError.html')
-    return render_template('projects.html', matches=matches)
+    
+    matchesFifty = matches
+    for x in range(len(matches)):
+        if(x>=30 and len(matches)<x):
+            matchesFifty.pop(x)
+        else:
+            continue
+
+    return render_template('projects.html', matches=matchesFifty)
     #return jsonify(matches)
 
 @app.route("/insert", methods=['POST'])
