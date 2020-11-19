@@ -41,6 +41,15 @@ def insert():
             "usd_goal_real": request.form["usd_goal_real"]
         }
         projectList.append(newProject)
+
+        if cachedStats["countryStats"] !=  "Empty":
+            countryToUpdate = newProject["country"]
+            cachedStats["countryStats"][countryToUpdate] += 1
+
+        if cachedStats["categoryStats"] !=  "Empty":
+            categoryToUpdate = newProject["category"]
+            cachedStats["categoryStats"][categoryToUpdate] += 1
+
     return render_template('insert.html')
 
 @app.route("/backup", methods=['GET'])
@@ -52,7 +61,14 @@ def backup():
 @app.route("/delete/<string:id>")
 def delete(id):
     for i in range(len(projectList)): 
-        if projectList[i]['id'] == id: 
+        if projectList[i]['id'] == id:
+            if cachedStats["countryStats"] !=  "Empty":
+                countryToUpdate = projectList[i]["country"]
+                cachedStats["countryStats"][countryToUpdate] -= 1 
+            if cachedStats["categoryStats"] !=  "Empty":
+                categoryToUpdate = projectList[i]["category"]
+                cachedStats["categoryStats"][categoryToUpdate] -= 1
+
             del projectList[i] 
             break
     return redirect('/')
@@ -61,8 +77,14 @@ def delete(id):
 def update(id):
     for i in range(len(projectList)): 
         if projectList[i]['id'] == id:
-            projectList[i]["name"] = request.form["name"] 
+            projectList[i]["name"] = request.form["name"]
+            if cachedStats["categoryStats"] !=  "Empty":
+                categoryToUpdate = projectList[i]["category"]
+                cachedStats["categoryStats"][categoryToUpdate] -= 1 
             projectList[i]["category"] = request.form["category"]
+            if cachedStats["categoryStats"] !=  "Empty":
+                categoryToUpdate = projectList[i]["category"]
+                cachedStats["categoryStats"][categoryToUpdate] += 1
             projectList[i]["main_category"] = request.form["main_category"]
             projectList[i]["currency"] = request.form["currency"]
             projectList[i]["deadline"] = request.form["deadline"]
@@ -71,7 +93,13 @@ def update(id):
             projectList[i]["pledged"] = request.form["pledged"]
             projectList[i]["state"] = request.form["state"]
             projectList[i]["backers"] = request.form["backers"]
+            if cachedStats["countryStats"] !=  "Empty":
+                countryToUpdate = projectList[i]["country"]
+                cachedStats["countryStats"][countryToUpdate] -= 1 
             projectList[i]["country"] = request.form["country"]
+            if cachedStats["countryStats"] !=  "Empty":
+                countryToUpdate = projectList[i]["country"]
+                cachedStats["countryStats"][countryToUpdate] += 1
             projectList[i]["usd_pledged"] = request.form["usd_pledged"]
             projectList[i]["usd_pledged_real"] = request.form["usd_pledged_real"]
             projectList[i]["usd_goal_real"] = request.form["usd_goal_real"]
@@ -79,13 +107,21 @@ def update(id):
 
 @app.route("/countryStats")
 def countryStats():
-    countryStats = analytics.getCountryStats(projectList)
-    return render_template('countryStats.html', countryValues=countryStats.values(), countryNames=countryStats.keys(), chartName="Country Statistics")
+    start = time.time()
+    #If we don't have the stats cached, then this is our first time loading this page. That means we will calculate the results and save them.
+    #If we already have the stats cached, we just use those instead of recalculating everything. 
+    if cachedStats["countryStats"] ==  "Empty":
+        cachedStats["countryStats"] = analytics.getCountryStats(projectList)
+    print("--- %s seconds ---" % (time.time() - start))
+    return render_template('countryStats.html', countryValues=cachedStats["countryStats"].values(), countryNames=cachedStats["countryStats"].keys(), chartName="Country Statistics")
 
 @app.route("/categoryStats")
 def categoryStats():
-    categoryStats = analytics.getCategoryStats(projectList)
-    return render_template('categoryStats.html', categoryValues=categoryStats.values(), categoryNames=categoryStats.keys(), chartName="Category Statistics")
+    #If we don't have the stats cached, then this is our first time loading this page. That means we will calculate the results and save them.
+    #If we already have the stats cached, we just use those instead of recalculating everything. 
+    if cachedStats["categoryStats"] ==  "Empty":
+        cachedStats["categoryStats"] = analytics.getCategoryStats(projectList)
+    return render_template('categoryStats.html', categoryValues=cachedStats["categoryStats"].values(), categoryNames=cachedStats["categoryStats"].keys(), chartName="Category Statistics")
 
 @app.route("/deadlineStats")
 def deadlineStats():
@@ -109,4 +145,8 @@ def fundingVersusSuccessStats():
 
 if __name__ == "__main__":
     projectList = importCSV.buildList('data/projects_clean.csv')
+    cachedStats = {
+        "countryStats": "Empty",
+        "categoryStats": "Empty"
+    }
     app.run()
