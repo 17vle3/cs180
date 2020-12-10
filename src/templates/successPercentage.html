@@ -28,8 +28,10 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <canvas id="mostSuccessfulCategoryStats" width="600" height="400" aria-label="Percentage of Successes" role="img"></canvas>    
+<div class="container" style="height: 50%; width: 50%; padding-top: 0;">
+    <canvas style="position: absolute; z-index: -1;" id="mostSuccessfulCategoryStats" width="300" height="300" aria-label="Percentage of Successes" role="img"></canvas> 
+    
+       
 </div>
 <script>
 var mostSuccessfulCategoryStatsCanvas = document.getElementById('mostSuccessfulCategoryStats').getContext('2d');
@@ -52,7 +54,7 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
                 "{{successPercentageValue}}",
               {% endfor %}],
             backgroundColor: [
-                'rgba(180, 98, 251, 1)',
+                'rgba(180, 98, 251, .5)',
                 'rgba(228, 95, 206, 1)',
                 'rgba(197, 16, 97, 1)',
                 'rgba(123, 169, 203, 1)',
@@ -83,13 +85,16 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
 
             ],
             borderWidth: 1
+            
         }]
+        
     },
     options: {
         title: {
             display:true,
             text:'What Is The Total Success Percentage?',
-            fontSize:25
+            fontSize:25,
+            padding: 50
         },
         legend: {
             display:false
@@ -101,13 +106,20 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Percentage'
                  }
             }],
             yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    stepSize: 20
+                },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Total Success'
+                    labelString: 'Percentage'
+                 },
+                 gridLines: {
+                    display: false
                  }
             }]
         }

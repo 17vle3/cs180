@@ -301,17 +301,20 @@ def getMostSuccessfulCategoryStats(projectList):
 def getSuccessPercentageStats(projectList):
     successfulStateList = (search.search("successful", "state", projectList))
     mostSuccessfulStats = {
-        "Total Successes": 0,
-        "Total Projects" : 0
+        "Total Success": 0,
+        
         #Amperstand (&) is weird on graph so we manually spell it out
     }
     
     for project in successfulStateList:
-        mostSuccessfulStats["Total Successes"] += 1
+        mostSuccessfulStats["Total Success"] += 1
+    
+    totalProj= 0
+    
     for project in projectList:
-        mostSuccessfulStats["Total Projects"] +=1
+        totalProj +=1
     categoryStats = getCategoryStats(projectList)      
-    mostSuccessfulStats["Total Successes"] = round((mostSuccessfulStats["Total Successes"]/mostSuccessfulStats["Total Projects"] * 100), 2)
+    mostSuccessfulStats["Total Success"] = round((mostSuccessfulStats["Total Success"]/totalProj* 100), 2)
     
     return mostSuccessfulStats
 
