@@ -300,7 +300,6 @@ def getMostSuccessfulCategoryStats(projectList):
 
 def getSuccessPercentageStats(projectList):
     successfulStateList = (search.search("successful", "state", projectList))
-
     mostSuccessfulStats = {
         "Total Successes": 0,
         "Total Projects" : 0
@@ -309,15 +308,12 @@ def getSuccessPercentageStats(projectList):
     
     for project in successfulStateList:
         mostSuccessfulStats["Total Successes"] += 1
-
     for project in projectList:
         mostSuccessfulStats["Total Projects"] +=1
-
     categoryStats = getCategoryStats(projectList)      
     mostSuccessfulStats["Total Successes"] = round((mostSuccessfulStats["Total Successes"]/mostSuccessfulStats["Total Projects"] * 100), 2)
     
     return mostSuccessfulStats
-
 
 def getFundingVersusSuccessStats(projectList):
 

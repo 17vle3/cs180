@@ -41,15 +41,15 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
     //Chart options: bar, horizontalBar, pie, line, doughnut, radar, polarArea
     type: 'bar', 
     data: {
-        labels: [{% for mostSuccessfulCategoryName in mostSuccessfulCategoryNames %}
-                     "{{mostSuccessfulCategoryName}}",
+        labels: [{% for successPercentageName in successPercentageNames %}
+                     "{{successPercentageName}}",
                      {% endfor %}
                 ],
         datasets: [{
             label: '% Succeeded',
             
-            data : [{% for mostSuccessfulCategoryValue in mostSuccessfulCategoryValues %}
-                "{{mostSuccessfulCategoryValue}}",
+            data : [{% for successPercentageValue in successPercentageValues %}
+                "{{successPercentageValue}}",
               {% endfor %}],
             backgroundColor: [
                 'rgba(180, 98, 251, 1)',

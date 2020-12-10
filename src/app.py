@@ -165,11 +165,6 @@ def deadlineStats():
     deadlineStats, launchStats = analytics.getDeadlineStats(projectList)
     return render_template('deadlineStats.html', deadlineValues=deadlineStats.values(), launchValues=launchStats.values(), deadlineNames=deadlineStats.keys(), chartName="Deadline Statistics")
 
-@app.route("/successPercentage")
-def successPercentage():
-    successPercentage = analytics.getSuccessPercentageStats(projectList)
-    return render_template('successPercentage.html', successfulPercentageValues=successPercentage.values(),  successPercentageNames=successPercentage.keys(), chartName="Success Percentage")
-
 @app.route("/mostSuccessfulCategoryStats")
 def mostSuccessfulCategoryStats():
     mostSuccessfulCategoryStats = analytics.getMostSuccessfulCategoryStats(projectList)
@@ -184,6 +179,11 @@ def failedTakeoffStats():
 def fundingVersusSuccessStats():
     fundingVersusSuccessStats = analytics.getFundingVersusSuccessStats(projectList)
     return render_template('fundingVersusSuccessStats.html', fundingVersusSuccessValues=fundingVersusSuccessStats.values(), fundingVersusSuccessNames=fundingVersusSuccessStats.keys(), chartName="Funding Versus Success Statistics")
+
+@app.route("/successPercentage")
+def successPercentage():
+    successPercentage = analytics.getSuccessPercentageStats(projectList)
+    return render_template('successPercentage.html', successPercentageValues=successPercentage.values(),  successPercentageNames=successPercentage.keys(), chartName="Success Percentage")
 
 if __name__ == "__main__":
     projectList = importCSV.buildList('data/projects_clean.csv')
