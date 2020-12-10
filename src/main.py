@@ -18,14 +18,15 @@ def results():
     if not matches:
         return render_template('matchError.html')
     
-    matchesFifty = matches
+    done = 0
+    matchesLimited = matches
     for x in range(len(matches)):
         if(x>=30 and len(matches)<x):
-            matchesFifty.pop(x)
-        else:
-            continue
+            matchesLimited.pop(x)
+        if(len(matches)<x):
+            done = 1
 
-    return render_template('projects.html', matches=matchesFifty)
+    return render_template('projects.html', matches=matchesLimited)
     #return jsonify(matches)
 
 @app.route("/insert", methods=['POST'])

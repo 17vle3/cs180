@@ -165,6 +165,11 @@ def deadlineStats():
     deadlineStats, launchStats = analytics.getDeadlineStats(projectList)
     return render_template('deadlineStats.html', deadlineValues=deadlineStats.values(), launchValues=launchStats.values(), deadlineNames=deadlineStats.keys(), chartName="Deadline Statistics")
 
+@app.route("/successPercentage")
+def successPercentage():
+    successPercentage = analytics.getSuccessPercentageStats(projectList)
+    return render_template('successPercentage.html', successfulPercentageValues=successPercentage.values(),  successPercentageNames=successPercentage.keys(), chartName="Success Percentage")
+
 @app.route("/mostSuccessfulCategoryStats")
 def mostSuccessfulCategoryStats():
     mostSuccessfulCategoryStats = analytics.getMostSuccessfulCategoryStats(projectList)
