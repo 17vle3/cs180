@@ -17,7 +17,7 @@
                     <select class="form-control" name ="filter" id="filter">
                         <option value="id">ID</option> 
                         <option value="name"selected>Name</option>
-                        <option value="category">Category</option>
+                        <option value="main_category">Category</option>
                         <option value="currency">Currency</option>
                         <option value="backers"># of Backers</option>
                         <option value="country">Country</option>
@@ -40,7 +40,7 @@ var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
     type: 'doughnut', 
     data: {
         labels: [{% for categoryName in categoryNames %}
-                     "{{categoryName}}",
+                     "{{categoryName}} Projects",
                      {% endfor %}
                 ],
         datasets: [{
@@ -85,7 +85,7 @@ var failedTakeoffStatsChart = new Chart(failedTakeoffStatsCanvas, {
     options: {
         title: {
             display:true,
-            text:'How Many Projects Failed To Take Off?',
+            text:'How Many Projects Failed To Take Off? (0 Backers)',
             fontSize:25
         }
     }

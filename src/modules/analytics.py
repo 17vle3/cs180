@@ -95,7 +95,6 @@ def getCountryStats(projectList):
         #United States
         elif project['country'] == "US":
             countryStats["US"] += 1
-    print(countryStats["US"])
     return countryStats
 
 def getCategoryStats(projectList):
@@ -350,12 +349,12 @@ def getFundingVersusSuccessStats(projectList):
             rawFundingVersusSuccessStats["1,000,001+ Failed"] += 1
 
     fundingVersusSuccessStats = {
-        "0-100": round((rawFundingVersusSuccessStats["0-100 Success"] / (rawFundingVersusSuccessStats["0-100 Success"] + rawFundingVersusSuccessStats["0-100 Failed"]) * 100), 2),
-        "101-1,000": round((rawFundingVersusSuccessStats["101-1,000 Success"] / (rawFundingVersusSuccessStats["101-1,000 Success"] + rawFundingVersusSuccessStats["101-1,000 Failed"]) * 100), 2),
-        "1,001-10,000": round((rawFundingVersusSuccessStats["1,001-10,000 Success"] / (rawFundingVersusSuccessStats["1,001-10,000 Success"] + rawFundingVersusSuccessStats["1,001-10,000 Failed"]) * 100), 2),
-        "10,001-100,000": round((rawFundingVersusSuccessStats["10,001-100,000 Success"] / (rawFundingVersusSuccessStats["10,001-100,000 Success"] + rawFundingVersusSuccessStats["10,001-100,000 Failed"]) * 100), 2),
-        "100,001-1,000,000": round((rawFundingVersusSuccessStats["100,001-1,000,000 Success"] / (rawFundingVersusSuccessStats["100,001-1,000,000 Success"] + rawFundingVersusSuccessStats["100,001-1,000,000 Failed"]) * 100), 2),
-        "1,000,001+": round((rawFundingVersusSuccessStats["1,000,001+ Success"] / (rawFundingVersusSuccessStats["1,000,001+ Success"] + rawFundingVersusSuccessStats["1,000,001+ Failed"]) * 100), 2)
+        "$0-$100": round((rawFundingVersusSuccessStats["0-100 Success"] / (rawFundingVersusSuccessStats["0-100 Success"] + rawFundingVersusSuccessStats["0-100 Failed"]) * 100), 2),
+        "$101-$1,000": round((rawFundingVersusSuccessStats["101-1,000 Success"] / (rawFundingVersusSuccessStats["101-1,000 Success"] + rawFundingVersusSuccessStats["101-1,000 Failed"]) * 100), 2),
+        "$1,001-$10,000": round((rawFundingVersusSuccessStats["1,001-10,000 Success"] / (rawFundingVersusSuccessStats["1,001-10,000 Success"] + rawFundingVersusSuccessStats["1,001-10,000 Failed"]) * 100), 2),
+        "$10,001-$100,000": round((rawFundingVersusSuccessStats["10,001-100,000 Success"] / (rawFundingVersusSuccessStats["10,001-100,000 Success"] + rawFundingVersusSuccessStats["10,001-100,000 Failed"]) * 100), 2),
+        "$100,001-$1,000,000": round((rawFundingVersusSuccessStats["100,001-1,000,000 Success"] / (rawFundingVersusSuccessStats["100,001-1,000,000 Success"] + rawFundingVersusSuccessStats["100,001-1,000,000 Failed"]) * 100), 2),
+        "$1,000,001+": round((rawFundingVersusSuccessStats["1,000,001+ Success"] / (rawFundingVersusSuccessStats["1,000,001+ Success"] + rawFundingVersusSuccessStats["1,000,001+ Failed"]) * 100), 2)
     }
 
     return fundingVersusSuccessStats
@@ -377,31 +376,72 @@ def getDeadlineStats(projectList):
         "December": 0
     }
 
+    launchStats = {
+        "January": 0,
+        "February": 0,
+        "March": 0,
+        "April": 0,
+        "May": 0,
+        "June": 0,
+        "July": 0,
+        "August": 0,
+        "September": 0,
+        "October": 0,
+        "November": 0,
+        "December": 0
+    }
+
     for project in projectList:
-        projectDeadline = datetime.strptime(project['deadline'], "%m/%d/%Y")
-        if projectDeadline.month == 1:
+        deadlineDate = project["deadline"].split('/')
+        if deadlineDate[0] == '1':
             deadlineStats["January"] += 1
-        elif projectDeadline.month == 2:
-            deadlineStats["February"] += 1
-        elif projectDeadline.month == 3:
-            deadlineStats["March"] += 1
-        elif projectDeadline.month == 4:
+        elif deadlineDate[0] == '2':
+           deadlineStats["February"] += 1
+        elif deadlineDate[0] == '3':
+           deadlineStats["March"] += 1
+        elif deadlineDate[0] == '4':
             deadlineStats["April"] += 1
-        elif projectDeadline.month == 5:
+        elif deadlineDate[0] == '5':
             deadlineStats["May"] += 1
-        elif projectDeadline.month == 6:
+        elif deadlineDate[0] == '6':
             deadlineStats["June"] += 1
-        elif projectDeadline.month == 7:
+        elif deadlineDate[0] == '7':
             deadlineStats["July"] += 1
-        elif projectDeadline.month == 8:
+        elif deadlineDate[0] == '8':
             deadlineStats["August"] += 1
-        elif projectDeadline.month == 9:
+        elif deadlineDate[0] == '9':
             deadlineStats["September"] += 1
-        elif projectDeadline.month == 10:
+        elif deadlineDate[0] == '10':
             deadlineStats["October"] += 1
-        elif projectDeadline.month == 11:
+        elif deadlineDate[0] == '11':
             deadlineStats["November"] += 1
-        elif projectDeadline.month == 12:
+        elif deadlineDate[0] == '12':
             deadlineStats["December"] += 1
 
-    return deadlineStats
+        launchDate = project["launched"].split('/')
+        if launchDate[0] == '1':
+            launchStats["January"] += 1
+        elif launchDate[0] == '2':
+           launchStats["February"] += 1
+        elif launchDate[0] == '3':
+           launchStats["March"] += 1
+        elif launchDate[0] == '4':
+            launchStats["April"] += 1
+        elif launchDate[0] == '5':
+            launchStats["May"] += 1
+        elif launchDate[0] == '6':
+            launchStats["June"] += 1
+        elif launchDate[0] == '7':
+            launchStats["July"] += 1
+        elif launchDate[0] == '8':
+            launchStats["August"] += 1
+        elif launchDate[0] == '9':
+            launchStats["September"] += 1
+        elif launchDate[0] == '10':
+            launchStats["October"] += 1
+        elif launchDate[0] == '11':
+            launchStats["November"] += 1
+        elif launchDate[0] == '12':
+            launchStats["December"] += 1
+
+    return deadlineStats, launchStats

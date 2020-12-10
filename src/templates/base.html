@@ -1,41 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .dropbtn {
-          background-color: #4CAF50;
-          color: white;
-          padding: .375rem .75rem;
-          font-size: 16px;
-          border: none;
-          cursor: pointer;
-        }
-        
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
-        
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          right: 0;
-          background-color: #f9f9f9;
-          min-width: 250px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-        
-        .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
-        
-        .dropdown-content a:hover {background-color: #f1f1f1;}
-        .dropdown:hover .dropdown-content {display: block;}
-        .dropdown:hover .dropbtn {background-color: #3e8e41;}
-        </style>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,114 +19,132 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         
     </head>
-    <body style="font-family: 'Roboto', sans-serif; ">
+    <body class="home-body">
         <nav class="navbar navbar-expand-md bg-light">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <!-- DROPDOWN FORM FOR INSERTING STARTS HERE-->
-                    <div class="dropdown" style="float: left;">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert Project</button>
-                        <div class="dropdown-menu">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insert Project</button>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-insert">
                             <form action="/insert" method="POST" >
-                                <div class="form-row" style="padding: 3px">
+                                <div class="form-row" >
                                     <div class="col">
-                                        <input type="text" class="form-control" name="id" placeholder="ID" required="required" minlength="9">
+                                        <input type="text" class="form-control" name="id" placeholder="ID (9 digits or more)" required minlength="9">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="name" placeholder="Name" required="required" minlength="5">
-                                    </div>
-                                </div>
-                                <div class="form-row" style="padding: 3px">
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="category" placeholder="Category" required="required">
-                                    </div>
-                                    <div class="col">
-                                    <input type="text" class="form-control" name="main_category" placeholder="Main Category" required="required">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="currency" placeholder="Currency" required="required">
+                                        <input type="text" class="form-control" name="name" placeholder="Project Name" required minlength="3">
                                     </div>
                                 </div>
-                                <div class="form-row" style="padding: 3px">
+                                <div class="form-row" >
                                     <div class="col">
-                                        <label for="deadline">Deadline:</label> 
-                                        <input type="date" id="deadline" class="form-control" name="deadline" required="required">
+                                        <select name="category" class="form-control" id="category" placeholder="Category" required>
+                                            <option value="" selected disabled>Category</option>
+                                            <option value="Comics">Comics</option>
+                                            <option value="Crafts">Crafts</option>
+                                            <option value="Dance">Dance</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="Film and Video">Film and Video</option>
+                                            <option value="Food">Food</option>
+                                            <option value="Journalism">Journalism</option>
+                                            <option value="Games">Games</option>
+                                            <option value="Music">Music</option>
+                                            <option value="Photography">Photography</option>
+                                            <option value="Publishing">Publishing</option>
+                                            <option value="Technology">Technology</option>
+                                            <option value="Theater">Theater</option>
+                                        </select>
                                     </div>
+                                    <div class="col">
+                                        <div class="col">
+                                            <select name="country" class="form-control" id="country" required>
+                                                <option value="AU">AU</option>
+                                                <option value="BE">BE</option>
+                                                <option value="CA">CA</option>
+                                                <option value="CH">CH</option>
+                                                <option value="DE">DE</option>
+                                                <option value="DK">DK</option>
+                                                <option value="ES">ES</option>
+                                                <option value="FR">FR</option>
+                                                <option value="GB">GB</option>
+                                                <option value="HK">HK</option>
+                                                <option value="IE">IE</option>
+                                                <option value="IT">IT</option>
+                                                <option value="JP">JP</option>
+                                                <option value="LU">LU</option>
+                                                <option value="MX">MX</option>
+                                                <option value="NL">NL</option>
+                                                <option value="NO">NO</option>
+                                                <option value="NZ">NZ</option>
+                                                <option value="SE">SE</option>
+                                                <option value="SG">SG</option>
+                                                <option value="US" selected>US</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
                                     <div class="col">
                                         <label for="launched">Launched:</label> 
-                                        <input type="date" id="launched" class="form-control" name="launched" required="required">
+                                        <input type="date" id="launched" class="form-control" name="launched" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="deadline">Deadline:</label> 
+                                        <input type="date" id="deadline" class="form-control" name="deadline" required>
                                     </div>
                                 </div>
-                                <div class="form-row" style="padding: 3px">
+                                <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" name="goal" placeholder="Goal" required="required" min="20" max="999999999">
+                                        <select name="currency" class="form-control" id="currency" required>
+                                            <option value="USD" selected>USD</option>
+                                        </select>
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged" required="required" min="0" max="999999999">
+                                        <input type="number" class="form-control" name="goal" placeholder="Goal (USD)" required min="0" max="999999999">
                                     </div>
                                     <div class="col">
-                                        <label for="state">State:</label>
-                                        <select name="state" class="form-control" id="state">
-                                            <option value="successful">Successful</option>
+                                        <input type="number" class="form-control" name="pledged" placeholder="Pledged (USD)" required min="0" max="999999999">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <select name="state" class="form-control" id="state" required>
+                                            <option value="successful" selected>Successful</option>
                                             <option value="failed">Failed</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-row" style="padding: 3px">
                                     <div class="col">
-                                        <input type="number" class="form-control" name="backers" placeholder="# Backers" min="0" max="999999999">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" name="country" placeholder="Country" required="required">
-                                    </div>
-                                    <div class="col">
-                                        <input type="number" class="form-control" name="usd_pledged" placeholder="USD Pledged">
+                                        <input type="number" class="form-control" name="backers" placeholder="# Backers" min="0" max="999999999" required>
                                     </div>
                                 </div>
-                                <div class="form-row" style="padding: 3px">
+                                <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" name="usd_pledged_real" placeholder="USD Pledged Real">
-                                    </div>
-                                    <div class="col">
-                                        <input type="number" class="form-control" name="usd_goal_real" placeholder="USD Goal Real">
-                                    </div>
-                                </div>
-                                <div class="form-row" style="padding: 3px">
-                                    <div class="col" style="padding-top: 9px;">
-                                        <center><button type="submit" class="btn btn-success">Insert Project</button> </center>
+                                        <center><button type="submit" class="btn btn-success insert-button">Insert Project</button> </center>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <!-- DROPDOWN FORM FOR INSERTING ENDS HERE-->
-
-                    <div class="dropdown" >
-                        <button class="dropbtn" style="">Analytics</button>
-                        <div class="dropdown-content" style="right:0;">
-                            <a class="nav-link" href="{{ url_for('countryStats') }}">Breakdown By Country</a>
-                            <a class="nav-link" href="{{ url_for('failedTakeoffStats') }}">Breakdown by Failed Takeoff</a>
-                            <a class="nav-link" href="{{ url_for('categoryStats') }}">Most Popular Categories</a>
-                            <a class="nav-link" href="{{ url_for('deadlineStats') }}">Deadline Stats</a>
-                            <a class="nav-link" href="{{ url_for('mostSuccessfulCategoryStats') }}">Most Successful Categories</a>
-                            <a class="nav-link" href="{{ url_for('fundingVersusSuccessStats') }}">Funding vs Success</a>
-                            
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Analytics</button>
+                        <div class="dropdown-menu dropdown-menu-left dropdown-menu-analytics">
+                            <a class="nav-link" href="{{ url_for('countryStats') }}">By Country</a>
+                            <a class="nav-link" href="{{ url_for('categoryStats') }}">By Category</a>
+                            <a class="nav-link" href="{{ url_for('deadlineStats') }}">By Start/End Date</a>
+                            <a class="nav-link" href="{{ url_for('mostSuccessfulCategoryStats') }}">Most Successful Category</a>
+                            <a class="nav-link" href="{{ url_for('failedTakeoffStats') }}">Failed Takeoffs</a>
+                            <a class="nav-link" href="{{ url_for('fundingVersusSuccessStats') }}">Funding Vs Success</a>
                         </div>
-                      </div>
-                <!-- </li>
-                <li class="nav-item">
-                        <a class="nav-link btn btn-light btn-sm" href="{{ url_for('backup') }}">Backup Data</a>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('countryStats') }}">Breakdown By Country</a>
+                    <a class="btn btn-outline-info" href="{{ url_for('backup') }}">Backup Data</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('failedTakeoffStats') }}">Breakdown by Failed Takeoff</a>
-                </li>-->
             </ul>
         </nav>
-        
-            <!-- SEARCH BAR ENDS HERE-->
         {% block body %}{% endblock %}
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

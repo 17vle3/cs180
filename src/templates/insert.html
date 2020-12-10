@@ -4,10 +4,9 @@
 
 {% block body %}
     <div class="home container-fluid text-center">
-        <h1 class="brand-font">Project has been inserted!</h1>
+        <h1 class="brand-font site-message">Project has been inserted!</h1>
     </div>
     <center><a class="navbar-brand brand-font logo" href="{{ url_for('index') }}" style="font-family: 'Roboto', sans-serif; font-size: 250%; margin-top: 1%;">Kickstarter Analytics</a></center>
-            <!-- SEARCH BAR STARTS HERE-->
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="w-60">
@@ -17,8 +16,8 @@
                                 <label for="filter" style="padding-left: 10px; padding-right: 10px;">Search by...</label>
                                 <select class="form-control" name ="filter" id="filter">
                                     <option value="id">ID</option> 
-                                    <option value="name">Name</option>
-                                    <option value="category">Category</option>
+                                    <option value="name" selected>Name</option>
+                                    <option value="main_category">Category</option>
                                     <option value="currency">Currency</option>
                                     <option value="backers"># of Backers</option>
                                     <option value="country">Country</option>

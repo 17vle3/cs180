@@ -19,7 +19,7 @@
                     <select class="form-control" name ="filter" id="filter">
                         <option value="id">ID</option> 
                         <option value="name"selected>Name</option>
-                        <option value="category">Category</option>
+                        <option value="main_category">Category</option>
                         <option value="currency">Currency</option>
                         <option value="backers"># of Backers</option>
                         <option value="country">Country</option>
@@ -46,11 +46,11 @@ var fundingVersusSuccessStatsChart = new Chart(fundingVersusSuccessStatsCanvas, 
                      {% endfor %}
                 ],
         datasets: [{
-            label: '{{ chartName }}',
-            fill: false,
+            label: 'Success Rate',
+            fill: true,
             lineTension: 0.1,
             //Background color is color of the dot points
-            backgroundColor: "rgba(12, 238, 11, 0.9)",
+            backgroundColor: "rgba(9, 220, 9, 0.9)",
             pointRadius: 12,
             //Border color is the color of the graph line
             borderColor: "rgba(0, 0, 0, 1)",
@@ -62,7 +62,7 @@ var fundingVersusSuccessStatsChart = new Chart(fundingVersusSuccessStatsCanvas, 
     options: {
         title: {
             display:true,
-            text:'Is the success rate determined by the funding goal?',
+            text:"Does The Funding Goal Influence The Project's Success Rate?",
             fontSize:25
         },
         legend: {

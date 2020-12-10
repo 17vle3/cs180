@@ -19,7 +19,7 @@
                     <select class="form-control" name ="filter" id="filter">
                         <option value="id">ID</option> 
                         <option value="name"selected>Name</option>
-                        <option value="category">Category</option>
+                        <option value="main_category">Category</option>
                         <option value="currency">Currency</option>
                         <option value="backers"># of Backers</option>
                         <option value="country">Country</option>
@@ -42,12 +42,11 @@ var categoryStatsChart = new Chart(categoryStatsCanvas, {
     type: 'pie', 
     data: {
         labels: [{% for categoryName in categoryNames %}
-                     "{{categoryName}}",
+                     "{{categoryName}} Projects",
                      {% endfor %}
                 ],
         datasets: [{
-            label: '{{ chartName }}',
-            
+            label: 'Projects',            
             data : [{% for categoryValue in categoryValues %}
                 "{{categoryValue}}",
               {% endfor %}],
@@ -88,7 +87,7 @@ var categoryStatsChart = new Chart(categoryStatsCanvas, {
     options: {
         title: {
             display:true,
-            text:'What are the most popular Kickstarter Categories?',
+            text:'What Are The Most Popular Kickstarter Categories?',
             fontSize:25
         }
     }

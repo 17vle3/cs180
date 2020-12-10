@@ -19,7 +19,7 @@
                     <select class="form-control" name ="filter" id="filter">
                         <option value="id">ID</option> 
                         <option value="name"selected>Name</option>
-                        <option value="category">Category</option>
+                        <option value="main_category">Category</option>
                         <option value="currency">Currency</option>
                         <option value="backers"># of Backers</option>
                         <option value="country">Country</option>
@@ -46,7 +46,7 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
                      {% endfor %}
                 ],
         datasets: [{
-            label: '{{ chartName }}',
+            label: '% Succeeded',
             
             data : [{% for mostSuccessfulCategoryValue in mostSuccessfulCategoryValues %}
                 "{{mostSuccessfulCategoryValue}}",
@@ -88,7 +88,7 @@ var mostSuccessfulCategoryStatsChart = new Chart(mostSuccessfulCategoryStatsCanv
     options: {
         title: {
             display:true,
-            text:'What are the most popular Kickstarter Categories?',
+            text:'What Are The Most Successful Kickstarter Categories?',
             fontSize:25
         },
         legend: {

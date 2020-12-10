@@ -10,6 +10,39 @@ html {
     letter-spacing: 0.05rem;
 }
 
+.dropdown-menu-analytics {
+    width: 225px;
+    height: 250px;
+}
+
+.dropdown-menu-insert {
+    background-color: #f2f2f2;
+    width: 500px;
+    height: 350px;
+}
+
+.dropdown-menu-update {
+    background-color: #f2f2f2;
+    width: 500px;
+    height: 350px;
+}
+
+.form-control {
+    margin-top: 3px;
+}
+
+.home-body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.home-link {
+    color: white;
+}
+
+.insert-button {
+    margin-top: 15px;
+}
+
 .logo{ 
     color: #5cb85c;
 }
@@ -26,7 +59,13 @@ html {
     color: #202020;
 }
 
-.dropdown-menu {
-    width: 500px;
-    height: 400px;
+.site-message {
+    font-family: 'Roboto', sans-serif; 
+    color:#666666;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.update-button {
+    margin-top: 15px;
 }

@@ -17,7 +17,7 @@
                     <select class="form-control" name ="filter" id="filter">
                         <option value="id">ID</option> 
                         <option value="name"selected>Name</option>
-                        <option value="category">Category</option>
+                        <option value="main_category">Category</option>
                         <option value="currency">Currency</option>
                         <option value="backers"># of Backers</option>
                         <option value="country">Country</option>
@@ -44,7 +44,7 @@ var countryStatsChart = new Chart(countryStatsCanvas, {
                      {% endfor %}
                 ],
         datasets: [{
-            label: '{{ chartName }}',
+            label: '# of Projects ',
             minBarLength: 10,
             data : [{% for countryValue in countryValues %}
                 "{{countryValue}}",
@@ -103,7 +103,7 @@ var countryStatsChart = new Chart(countryStatsCanvas, {
     options: {
         title: {
             display:true,
-            text:'Where Are Most Kickstarter Projects Started From?',
+            text:'Where Do Most Kickstarter Projects Come From?',
             fontSize:25
         },
         legend: {
